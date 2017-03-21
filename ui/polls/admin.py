@@ -13,6 +13,7 @@ class QuestionAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
     list_display = ('question_text', 'pub_date', 'was_published_recently')
+    list_filter = ['pub_date']
     
 # Register your models here.
 admin.site.register(Question, QuestionAdmin)
