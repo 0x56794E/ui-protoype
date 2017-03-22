@@ -9,5 +9,5 @@ def index(request):
 
 def detail(request, portfolio_id):
     port = get_object_or_404(Portfolio, pk=portfolio_id)
-    return render(request, 'assets/detail.html', {'portfolio' : portfolio})
+    return render(request, 'assets/detail.html', {'portfolio' : port})
 

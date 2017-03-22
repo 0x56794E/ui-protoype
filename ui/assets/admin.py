@@ -4,7 +4,7 @@ from .models import Portfolio, Asset, AssetPortfolio
 
 # Create assets inline
 class AssetPortfolioInline(admin.TabularInline):
-    model = Portfolio.assets.through
+    model = AssetPortfolio
     extra = 2
 
 
@@ -16,7 +16,9 @@ class PortfolioAdmin(admin.ModelAdmin):
         ('Date Info', {'fields': ['creation_date'], 'classes': ['collapse']}),
     ]
     inlines = [AssetPortfolioInline]
-
+    search_fields = ['name']
+    list_display = ('name', 'creation_date')
+    
 class AssetAdmin(admin.ModelAdmin):
     pass
 
