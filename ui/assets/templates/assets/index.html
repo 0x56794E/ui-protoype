@@ -1,0 +1,10 @@
+{% if portfolios %}
+
+<ul>
+  {% for portfolio in portfolios %}
+    <li><a href="{% url 'assets:detail' portfolio.id %}">{{ portfolio.name }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+    <p>No portfolio available</p
+{% endif %}
