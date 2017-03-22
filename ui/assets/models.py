@@ -2,9 +2,9 @@ from django.db import models
 
 class Asset(models.Model):
     ASSET_TYPES = (
-        ('Stock', 'st'),
-        ('Equity', 'eq'),
-        ('Commodity', 'cm'),
+        ('Stock', 'Stock'),
+        ('Equity', 'Equity'),
+        ('Commodity', 'Commodity'),
     )
     
     name = models.CharField(max_length=200)
@@ -28,3 +28,8 @@ class Portfolio(models.Model):
 
     class Meta:
         ordering = ('name',)
+
+class AssetPortfolio(models.Model):
+    asset = models.ForeignKey(Asset)
+    portfolio = models.ForeignKey(Portfolio)
+    percent = models.IntegerField(default=0)
