@@ -14,7 +14,6 @@ class PortfolioAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name']}),
         ('Date Info', {'fields': ['creation_date'], 'classes': ['collapse']}),
-        ('Assets', {'fields': ['assets']}),
     ]
     inlines = [AssetPortfolioInline]
 
