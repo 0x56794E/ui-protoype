@@ -1,2 +1,7 @@
+# transient/tmp file
 *~
 *.pyc
+
+# eclilpse file
+.project
+.pydevproject
