@@ -5,3 +5,6 @@
 # eclilpse file
 .project
 .pydevproject
+
+# mac file
+.DS_Store
