@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
 def index(request):
-    return render(request, "dashboards/index");
+    context = {'name': 'Vy'}
+    return render(request, "dashboard/index.html", context);
