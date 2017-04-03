@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Dashboard</title>
-	{% load static %}
-	<script type="text/javascript" src="{% static 'd3/d3.js' %}"></script>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>Portfolio Management</title>
+		
+		<!--  Load js and css stuff -->
+		{% load static %}
+		<script type="text/javascript" src="{% static 'lib/d3.v3.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'css/ioninc.css'"/>
+		<link rel="stylesheet" href="{% static 'css/app.css'"/>
+		<link rel="stylesheet" href="{% static 'lib/xcharts.css'"/>
+	
+	</head>
 
 	<body>
-		Hello, {{ name }}
+		<div id="left-nav">
+			<div class="welcome">Welcome, {{ name }}!</div>
+			<div class="title">Menu</div>
+			<ul class="list">
+				<li class="list-item">
+					<a class="item-content" href="#dashboard/1">
+						<i class="ion-stars-bars"></i>
+						<h3 Dashboard 1</h3>
+						<p>Test Dashboard 1</p>
+					</a>
+				</li>
+				<li class="list-item">
+		            <a class="item-content" href="#dashboard/2">
+		                <i class="ion-pie-graph"></i>
+		                <h3>Dashboard 2</h3>
+		                <p>Pie chart example</p>
+		            </a>
+		        </li>
+		        <li class="list-item">
+		            <a class="item-content" href="#dashboard/3">
+		                <i class="ion-connection-bars"></i>
+		                <h3>Dashboard 3</h3>
+		                <p>Four charts drill-down</p>
+		            </a>
+		        </li>
+			</ul>
+		</div>
+		
+		<!-- Js for constructing charts go here -->
 	</body>
 </html>
