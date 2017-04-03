@@ -6,7 +6,6 @@
 		
 		<!--  Load js and css stuff -->
 		{% load static %}
-		<script type="text/javascript" src="{% static 'lib/d3.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'css/ionic.css' %}"/>
 		<link rel="stylesheet" href="{% static 'css/app.css' %}"/>
 		<link rel="stylesheet" href="{% static 'lib/xcharts.css' %}"/>
@@ -41,7 +40,21 @@
 		        </li>
 			</ul>
 		</div>
+		<div id="container" class="transition">
+		    <header class="bar bar-header nav-bar bar-stable">
+		        <button id="btn-menu" class="button button-icon" style="font-size: 22px;"><i class="ion-navicon-round"></i></button>
+		        <h1 class="title">Allocation Dashboard</h1>
+		    </header>
+		    <div id="content"></div>
+		</div>
 		
 		<!-- Js for constructing charts go here -->
+		<script src="{% static 'lib/d3.js' %}"></script>
+		<script src="{% static 'lib/jquery.js'%}"></script>
+		<script src="{% static 'lib/fastclick.js'%}"></script>
+		<script src="{% static 'lib/xharts.js'%}"></script>
+		
+		<!-- Own Files -->
+		<script src="{% static 'js/app.js' %}"></script>
 	</body>
 </html>
