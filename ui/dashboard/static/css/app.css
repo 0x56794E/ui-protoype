@@ -150,3 +150,18 @@
 .color4 {
     fill: #672d8b;
 }
+
+.fleft
+{
+	float: left !important;
+}
+
+.fright
+{
+	float: right !important;
+}
+
+.clearDiv
+{
+	clear: both !important;
+}

@@ -18,21 +18,26 @@
         return false;
     });
 
+    //Route table
+//    var routes = {};
+//    routes["#dashboard"] = dashboard;
+//    routes["#stocks"] = stocks;
+    
     // Basic view routing
-    $(window).on('hashchange', route);
+    $(window).on('hashchange', function () {
+    	 var hash = window.location.hash;
+         
+         //Clean up first
+//         $.each(routes, function (key, val) {
+//         	if (key !== hash)
+//         		val.cleanup();
+//         });
+//         
+//         //Render
+//         routes[hash].render();         	
+    	 dashboard3.render();
+    });
 
-    function route() {
-        var hash = window.location.hash;
-        if (hash === "#dashboard") 
-        {
-            dashboard.render();
-        } 
-        else if (hash === "#stockselector") 
-        {
-        	stocks.render();
-        } 
-    }
-
-    dashboard.render();
+    dashboard3.render();
 
 }());

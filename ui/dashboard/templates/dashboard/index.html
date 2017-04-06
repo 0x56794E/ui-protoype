@@ -23,7 +23,7 @@
 						<p>Allocation Dashboard</p>
 					</a></li>
 			<li class="list-item"><a class="item-content"
-				href="#stockselector"> <i class="ion-briefcase"></i>
+				href="#stocks"> <i class="ion-briefcase"></i>
 					<h3>Stock Selector</h3>
 					<p>Select Preferred Stocks</p>
 			</a></li>
@@ -42,15 +42,18 @@
 
 	
 	<!-- Js for constructing charts go here -->
-	<script src="{% static 'lib/d3.js' %}"></script>
+	<script src="{% static 'lib/d3.v3.min.js' %}"></script>
 	<script src="{% static 'lib/jquery.js'%}"></script>
 	<script src="{% static 'lib/fastclick.js'%}"></script>
 	<script src="{% static 'lib/xcharts.js'%}"></script>
 	<script src="{% static 'lib/tv.js'%}"></script> <!-- For the ticking chart -->
 	
 	<!-- Own Files -->
-	<script src="{% static 'js/dashboard.js' %}"></script>
-	<script src="{% static 'js/stocks.js' %}"></script>
+	<script src="{% static 'summary.js' %}"></script>
+	<script src="{% static 'data.js' %}"></script>
+	<script src="{% static 'js/dashboard3.js' %}"></script>
+	
+	<!-- <script src="{% static 'js/stocks.js' %}"></script> -->
 	
 	
 	<script src="{% static 'js/app.js' %}"></script>

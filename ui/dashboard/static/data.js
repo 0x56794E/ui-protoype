@@ -4,35 +4,35 @@ results["1994"] =
 
     [
         {
-            "Country": "Canada",
+            "Country": "Category1",
             "Gold": 3,
             "Silver": 6,
             "Bronze": 4,
             "Total": 13
         },
         {
-            "Country": "Germany",
+            "Country": "Category2",
             "Gold": 8,
             "Silver": 7,
             "Bronze": 7,
             "Total": 22
         },
         {
-            "Country": "Norway",
+            "Country": "Category3",
             "Gold": 10,
             "Silver": 11,
             "Bronze": 5,
             "Total": 26
         },
         {
-            "Country": "Russia",
+            "Country": "Category4",
             "Gold": 11,
             "Silver": 8,
             "Bronze": 4,
             "Total": 23
         },
         {
-            "Country": "USA",
+            "Country": "Category5",
             "Gold": 6,
             "Silver": 5,
             "Bronze": 2,
@@ -44,35 +44,35 @@ results["1998"] =
 
     [
         {
-            "Country": "Canada",
+            "Country": "Category1",
             "Gold": 6,
             "Silver": 5,
             "Bronze": 4,
             "Total": 15
         },
         {
-            "Country": "Germany",
+            "Country": "Category2",
             "Gold": 11,
             "Silver": 8,
             "Bronze": 8,
             "Total": 27
         },
         {
-            "Country": "Norway",
+            "Country": "Category3",
             "Gold": 10,
             "Silver": 10,
             "Bronze": 5,
             "Total": 25
         },
         {
-            "Country": "Russia",
+            "Country": "Category4",
             "Gold": 7,
             "Silver": 5,
             "Bronze": 2,
             "Total": 14
         },
         {
-            "Country": "USA",
+            "Country": "Category5",
             "Gold": 6,
             "Silver": 3,
             "Bronze": 4,
@@ -85,35 +85,35 @@ results["2002"] =
 
     [
         {
-            "Country": "Canada",
+            "Country": "Category1",
             "Gold": 7,
             "Silver": 3,
             "Bronze": 7,
             "Total": 17
         },
         {
-            "Country": "Germany",
+            "Country": "Category2",
             "Gold": 10,
             "Silver": 16,
             "Bronze": 8,
             "Total": 34
         },
         {
-            "Country": "Norway",
+            "Country": "Category3",
             "Gold": 13,
             "Silver": 5,
             "Bronze": 7,
             "Total": 25
         },
         {
-            "Country": "Russia",
+            "Country": "Category4",
             "Gold": 5,
             "Silver": 4,
             "Bronze": 4,
             "Total": 13
         },
         {
-            "Country": "USA",
+            "Country": "Category5",
             "Gold": 10,
             "Silver": 13,
             "Bronze": 11,
@@ -125,35 +125,35 @@ results["2006"] =
 
     [
         {
-            "Country": "Canada",
+            "Country": "Category1",
             "Gold": 7,
             "Silver": 10,
             "Bronze": 7,
             "Total": 24
         },
         {
-            "Country": "Germany",
+            "Country": "Category2",
             "Gold": 11,
             "Silver": 11,
             "Bronze": 6,
             "Total": 28
         },
         {
-            "Country": "Norway",
+            "Country": "Category3",
             "Gold": 2,
             "Silver": 8,
             "Bronze": 9,
             "Total": 19
         },
         {
-            "Country": "Russia",
+            "Country": "Category4",
             "Gold": 8,
             "Silver": 6,
             "Bronze": 6,
             "Total": 20
         },
         {
-            "Country": "USA",
+            "Country": "Category5",
             "Gold": 9,
             "Silver": 9,
             "Bronze": 7,
@@ -165,35 +165,35 @@ results["2006"] =
 results["2010"] =
     [
         {
-            "Country": "Canada",
+            "Country": "Category1",
             "Gold": 14,
             "Silver": 7,
             "Bronze": 5,
             "Total": 26
         },
         {
-            "Country": "Germany",
+            "Country": "Category2",
             "Gold": 10,
             "Silver": 13,
             "Bronze": 7,
             "Total": 30
         },
         {
-            "Country": "Norway",
+            "Country": "Category3",
             "Gold": 9,
             "Silver": 8,
             "Bronze": 6,
             "Total": 23
         },
         {
-            "Country": "Russia",
+            "Country": "Category4",
             "Gold": 3,
             "Silver": 5,
             "Bronze": 7,
             "Total": 15
         },
         {
-            "Country": "USA",
+            "Country": "Category5",
             "Gold": 9,
             "Silver": 15,
             "Bronze": 13,

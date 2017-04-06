@@ -1,7 +1,7 @@
 var summary = [
     {
         "className": ".Canada",
-        "country": "Canada",
+        "country": "Category1",
         "data": [
             {
                 "x": 1994,
@@ -27,7 +27,7 @@ var summary = [
     },
     {
         "className": ".Germany",
-        "country": "Germany",
+        "country": "Category2",
         "data": [
             {
                 "x": 1994,
@@ -53,7 +53,7 @@ var summary = [
     },
     {
         "className": ".Norway",
-        "country": "Norway",
+        "country": "Category3",
         "data": [
             {
                 "x": 1994,
@@ -79,7 +79,7 @@ var summary = [
     },
     {
         "className": ".Russia",
-        "country": "Russia",
+        "country": "Category4",
         "data": [
             {
                 "x": 1994,
@@ -105,7 +105,7 @@ var summary = [
     },
     {
         "className": ".USA",
-        "country": "USA",
+        "country": "Category5",
         "data": [
             {
                 "x": 1994,

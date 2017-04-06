@@ -14,8 +14,14 @@ var stocks = (function () {
         $("#content").html(html);
     }
 
+    function cleanup ()
+    {
+    	$("#content").html("");
+    }
+    
     return {
-        render: render
+        render: render,
+        cleanup: cleanup
     }
 
 }());

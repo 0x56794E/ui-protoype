@@ -8,8 +8,8 @@ var dashboard3 = (function () {
         chart3,
         chart4,
         selectedYear = 2010,
-        selectedCountry = "USA",
-        selectedMedalType = "Gold";
+        selectedCountry = "Category1",
+        selectedMedalType = "Asset1";
 
     /* Functions to create the individual charts involved in the dashboard */
 
@@ -197,13 +197,15 @@ var dashboard3 = (function () {
             "type": "bar",
             "main": getCountryBreakdownForYear(selectedYear)
         };
-        $('#chart2>.title').html('Total Medals by Country in ' + selectedYear);
+        $('#chart2>.title').html('Moving Averages');
+//        $('#chart2>.title').html('Total Medals by Country in ' + selectedYear);
         chart2.setData(data);
     }
 
     function countrySelectionHandler(d, i) {
         selectedCountry = d.x;
-        $('#chart3>.title').html(selectedCountry + ' Medals in ' + selectedYear);
+        $('#chart3>.title').html('Asset Allocations');
+//        $('#chart3>.title').html(selectedCountry + ' Medals in ' + selectedYear);
         chart3.change(getMedalsForCountry(selectedCountry));
     }
 
@@ -215,7 +217,8 @@ var dashboard3 = (function () {
             "type": "bar",
             "main": getCountryBreakdownForMedalType(selectedMedalType, selectedYear)
         };
-        $('#chart4>.title').html(selectedMedalType + ' Medals in ' + selectedYear);
+        $('#chart4>.title').html('Momentum');
+//        $('#chart4>.title').html(CMedalType + ' Medals in ' + selectedYear);
         chart4.setData(data);
     }
 
@@ -252,9 +255,9 @@ var dashboard3 = (function () {
         for (var i = 0; i < countries.length; i++) {
             if (countries[i].Country === country) {
                 return [
-                    {"type": "Gold", "total": countries[i].Gold },
-                    {"type": "Silver", "total": countries[i].Silver},
-                    {"type": "Bronze", "total": countries[i].Bronze}
+                    {"type": "Class1", "total": countries[i].Gold },
+                    {"type": "Class2", "total": countries[i].Silver},
+                    {"type": "Class3", "total": countries[i].Bronze}
                 ];
             }
         }
@@ -266,22 +269,22 @@ var dashboard3 = (function () {
 
         var html =
             '<div id="chart1" class="chart">' +
-                '<div class="title">Top 5 Medal Countries</div>' +
+                '<div class="title">Historical Returns</div>' +
                 '<div class="graph"></div>' +
                 '</div>' +
 
                 '<div id="chart2" class="chart">' +
-                '<div class="title">Total Medals by Country in 2010</div>' +
+                '<div class="title">Moving Averages</div>' +
                 '<div class="graph"></div>' +
                 '</div>' +
 
                 '<div id="chart3" class="chart">' +
-                '<div class="title">USA Medals in 2010</div>' +
+                '<div class="title">Asset Allocations</div>' +
                 '<div class="graph"></div>' +
                 '</div>' +
 
                 '<div id="chart4" class="chart">' +
-                '<div class="title">Gold Medals in 2010</div>' +
+                '<div class="title">Momentum</div>' +
                 '<div class="graph"></div>' +
                 '</div>';
 

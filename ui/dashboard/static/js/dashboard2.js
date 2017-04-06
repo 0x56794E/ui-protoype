@@ -155,17 +155,11 @@ var dashboard2 = (function () {
             '<div id="chart1" class="chart chart2">' +
                 '<div class="title">Top 5 Medal Countries</div>' +
                 '<div class="graph"></div>' +
-                '</div>' +
-
-                '<div id="chart2" class="chart chart2">' +
-                '<div class="title">Total Medals by Country in 2010</div>' +
-                '<div class="graph"></div>' +
                 '</div>';
 
         $("#content").html(html);
 
         chart1 = createSummaryChart('#chart1', summary);
-        chart2 = createCountryBreakdownChart('#chart2', results[selectedYear]);
     }
 
     return {
