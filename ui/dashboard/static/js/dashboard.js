@@ -1,5 +1,4 @@
-var dashboard = (function () 
-		{
+var dashboard = (function () {
     "use strict";
     function createTickerPriceChart() 
     {
@@ -11,23 +10,22 @@ var dashboard = (function ()
     		+ "</div>";
 
         $("#content").append(html);
-        var chart = "test";
         
-//    	var chart = new TradingView.widget({
-//			"width" : 580,
-//			"height" : 350,
-//			"symbol" : "NASDAQ:AAPL",
-//			"interval" : "180",
-//			"timezone" : "Etc/UTC",
-//			"theme" : "White",
-//			"style" : "1",
-//			"locale" : "en",
-//			"toolbar_bg" : "#f1f3f6",
-//			"enable_publishing" : false,
-//			"allow_symbol_change" : true,
-//			"hideideas" : true
-//		});
-//    	
+    	var chart = new TradingView.widget({
+			"width" : 580,
+			"height" : 350,
+			"symbol" : "NASDAQ:AAPL",
+			"interval" : "180",
+			"timezone" : "Etc/UTC",
+			"theme" : "White",
+			"style" : "1",
+			"locale" : "en",
+			"toolbar_bg" : "#f1f3f6",
+			"enable_publishing" : false,
+			"allow_symbol_change" : true,
+			"hideideas" : true
+		});
+    	
         
     	$("#" + chart.id + "-wrapper").appendTo("#price-tix");
     }
@@ -44,6 +42,6 @@ var dashboard = (function ()
     return 
     {
         render: render
-    };
+    }
 
 }());
