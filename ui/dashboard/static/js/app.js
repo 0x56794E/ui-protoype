@@ -29,7 +29,7 @@
         } 
         else if (hash === "#stockselector") 
         {
-        	stockselector.render();
+            stockselector.render();
         } 
     }
 

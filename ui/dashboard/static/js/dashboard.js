@@ -1,7 +1,7 @@
 var dashboard = (function () {
-	
+
     "use strict";
-    
+
     function createTickerPriceChart() 
     {
     	//Create the container and title
