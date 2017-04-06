@@ -1,8 +1,7 @@
 var dashboard = (function () {
-
+	
     "use strict";
-
-
+    
     function createTickerPriceChart() 
     {
     	//Create the container and title
@@ -29,20 +28,21 @@ var dashboard = (function () {
 			"hideideas" : true
 		});
     	
+        
     	$("#" + chart.id + "-wrapper").appendTo("#price-tix");
-    	
     }
     
     /* Render the dashboard */
     function render() 
     {
-    	//Clear old content
+    	//Clear old content, if any
     	$("#content").html("");
     	
     	createTickerPriceChart();
     }
 
-    return {
+    return 
+    {
         render: render
     }
 
