@@ -29,10 +29,10 @@
         } 
         else if (hash === "#stockselector") 
         {
-            stockseelctor.render();
+            stockselector.render();
         } 
     }
 
+    //On load
     dashboard.render();
-
 }());
