@@ -18,19 +18,14 @@
 		<div class="title">Menu</div>
 		<ul class="list">
 			<li class="list-item"><a class="item-content"
-				href="#dashboard/1"> <i class="ion-stars-bars"></i>
-					<h3>Dashboard 1</h3>
-						<p>Test Dashboard 1</p>
+				href="#dashboard"> <i class="ion-stats-bars"></i>
+					<h3>Dashboard</h3>
+						<p>Allocation Dashboard</p>
 					</a></li>
 			<li class="list-item"><a class="item-content"
-				href="#dashboard/2"> <i class="ion-pie-graph"></i>
-					<h3>Dashboard 2</h3>
-					<p>Pie chart example</p>
-			</a></li>
-			<li class="list-item"><a class="item-content"
-				href="#dashboard/3"> <i class="ion-connection-bars"></i>
-					<h3>Dashboard 3</h3>
-					<p>Four charts drill-down</p>
+				href="#stockselector"> <i class="ion-briefcase"></i>
+					<h3>Stock Selector</h3>
+					<p>Select Preferred Stocks</p>
 			</a></li>
 		</ul>
 	</div>
@@ -45,41 +40,21 @@
 		<div id="content"></div>
 	</div>
 
-	<!-- Widget -->
-	<!-- TradingView Widget BEGIN -->
-	<script type="text/javascript"
-		src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
-	<script type="text/javascript">
-		new TradingView.widget({
-			"width" : 980,
-			"height" : 610,
-			"symbol" : "NASDAQ:AAPL",
-			"interval" : "D",
-			"timezone" : "Etc/UTC",
-			"theme" : "White",
-			"style" : "1",
-			"locale" : "en",
-			"toolbar_bg" : "#f1f3f6",
-			"enable_publishing" : false,
-			"allow_symbol_change" : true,
-			"hideideas" : true
-		});
-	</script>
-	<!-- TradingView Widget END -->
-
+	
 	<!-- Js for constructing charts go here -->
 	<script src="{% static 'lib/d3.js' %}"></script>
 	<script src="{% static 'lib/jquery.js'%}"></script>
 	<script src="{% static 'lib/fastclick.js'%}"></script>
 	<script src="{% static 'lib/xcharts.js'%}"></script>
-	<!-- 
-		<!-- Own Files -->
-	<script src="{% static 'js/dashboard1.js' %}"></script>
-	<script src="{% static 'js/dashboard2.js' %}"></script>
-	<script src="{% static 'js/dashboard3.js' %}"></script>
+	<script src="{% static 'lib/tv.js'%}"></script> <!-- For the ticking chart -->
+	
+	<!-- Own Files -->
+	<script src="{% static 'js/dashboard.js' %}"></script>
+	<script src="{% static 'js/stockselector.js' %}"></script>
+	
+	
 	<script src="{% static 'js/app.js' %}"></script>
-	-->
-
+	
 
 </body>
 </html>

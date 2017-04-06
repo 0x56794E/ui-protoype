@@ -23,15 +23,16 @@
 
     function route() {
         var hash = window.location.hash;
-        if (hash === "#dashboard/1") {
-            dashboard1.render();
-        } else if (hash === "#dashboard/2") {
-            dashboard2.render();
-        } else if (hash === "#dashboard/3") {
-            dashboard3.render();
-        }
+        if (hash === "#dashboard") 
+        {
+            dashboard.render();
+        } 
+        else if (hash === "#stockselector") 
+        {
+            stockseelctor.render();
+        } 
     }
 
-    dashboard1.render();
+    dashboard.render();
 
 }());
