@@ -35,9 +35,9 @@
 //         
 //         //Render
 //         routes[hash].render();         	
-    	 dashboard3.render();
+    	 dashboard.render();
     });
 
-    dashboard3.render();
+    dashboard.render();
 
 }());

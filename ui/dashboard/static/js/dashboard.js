@@ -40,6 +40,13 @@ var dashboard = (function () {
         createTixChart("#price-tix");
     	
     	//Normalized Returns Chart (from David)
+        var normChart = "<div id='norm-returns' class='chart'>"
+        	+ "<div class='title'>Normalized Returns</div>"
+        	+ "<div class='graph'>"
+        	+ "<iframe width='500' height='350' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
+        	+ "</div>"
+        	+ "</div>";
+        $("#content").append(normChart);
     }
     
     // Clean up on tab change
