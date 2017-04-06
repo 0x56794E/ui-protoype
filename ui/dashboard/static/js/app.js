@@ -34,5 +34,6 @@
     }
 
     //On load
-    dashboard.render();
+    console.log(dashboard);
+    //dashboard.render();
 }());
