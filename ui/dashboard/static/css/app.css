@@ -85,7 +85,7 @@
     font-family: Helvetica, Arial, Verdana, sans-serif;
     fill: #666;
     font-size: 12px;
-    width: 460px;
+    width: 470px;
     height: 320px;
     float: left;
     margin: 10px auto;
@@ -175,12 +175,11 @@
 
 #price-tix
 {
-	width: 1400px;
+	width: 1440px;
 	height: 380px;
 }
 
-#asset-price .graph
+#asset-alloc
 {
-	width: 400px;
-	height: 320px;
+	padding-left: 50px;
 }

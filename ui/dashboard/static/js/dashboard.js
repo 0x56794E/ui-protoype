@@ -93,30 +93,31 @@ var dashboard = (function () {
     /* Render the dashboard */
     function render() 
     {	
-    	//Normalized Returns Chart (from David)
-        var normChart = "<div id='norm-returns' class='chart'>"
-        	+ "<div class='title'>Normalized Returns</div>"
-        	+ "<div class='graph'>"
-        	+ "<iframe width='430' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
-        	+ "</div>"
-        	+ "</div>";
-        $("#content").append(normChart);
-        
-        //Asset prices (3rd chart)
+        //Asset prices 
         var assetPriceChart = "<div id='asset-price' class='chart'>"
-        	+ "<div class='title'>Asset Prices</div>"
-    		+ "<div class='graph'></div>"
+        	+ "<div class='title'>Historical Asset Price</div>"
+    		+ "<div class='graph'>" 
+    		+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/11.embed'></iframe>"
+    		+ "</div>"
     		+ "</div>";
         $("#content").append(assetPriceChart);
-        var asset_price=createAssetPricesChart("#asset-price", asset_price_dataset);
         
         //Allocation chart - order book/result from optimizer
         var pieChart = "<div id='asset-alloc' class='chart'>"
-        	+ "<div class='title'>Asset Allocation</div>"
+        	+ "<div class='title'>Optimal Allocation</div>"
         	+ "<div class='graph'></div>"
         	+ "</div>";
         $("#content").append(pieChart);
         createAssetAllocChart('#asset-alloc', getAssetAllocData());
+
+    	//Normalized Returns Chart (from David)
+        var normChart = "<div id='norm-returns' class='chart'>"
+        	+ "<div class='title'>Back-tested Return</div>"
+        	+ "<div class='graph'>"
+        	+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
+        	+ "</div>"
+        	+ "</div>";
+        $("#content").append(normChart);
         
         //Tix Chart
       	var tixChart = "<div id='price-tix' class='chart'>"
