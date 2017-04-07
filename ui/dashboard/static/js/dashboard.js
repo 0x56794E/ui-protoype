@@ -33,9 +33,8 @@ var dashboard = (function () {
     	
     }
     
-    function createAssetPricesChart(selector)
+    function createAssetPricesChart(selector, dataset)
     {
-    	var dataset = loadDataSet();
     	var data = {
 			'xScale': 'time',
 			'yScale': 'linear',
@@ -79,6 +78,9 @@ var dashboard = (function () {
     			.text(function (d, i) {
     				return dataset[i].asset;
     			});
+    	
+        return new xChart('line-dotted', data, selector + " .graph", options);
+        
     }
     
     /* Render the dashboard */
@@ -108,7 +110,7 @@ var dashboard = (function () {
     		+ "<div class='graph'></div>"
     		+ "</div>";
         
-        createAssetPricesChart("asset-price");
+        createAssetPricesChart("#asset-price", asset_price_dataset);
     }
     
     // Clean up on tab change
