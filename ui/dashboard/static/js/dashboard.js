@@ -83,6 +83,16 @@ var dashboard = (function () {
         
     }
     
+    
+    function getAssetAllocData()
+    {
+    	return [
+    		{"type": "Stocks        ", "pct": 40},
+    		{"type": "Private Equity", "pct": 30},
+    		{"type": "Other Asset   ", "pct": 30}
+    	];
+    }
+    
     /* Render the dashboard */
     function render() 
     {	
@@ -112,8 +122,101 @@ var dashboard = (function () {
         $("#content").append(assetPriceChart);
         
         createAssetPricesChart("#asset-price", asset_price_dataset);
+        
+        //Allocation chart - order book/result from optimizer
+        var pieChart = "<div id='asset-alloc' class='chart'>"
+        	+ "<div class='title'>Asset Allocation</div>"
+        	+ "<div class='graph'></div>"
+        	+ "</div>";
+        $("#content").append(pieChart);
+        
+        createAssetAllocChart('#asset-alloc', getAssetAllocData());
+        
+        
     }
-    
+
+    function createAssetAllocChart(selector, dataset)
+    {
+        var width = 490,
+            height = 260,
+            radius = Math.min(width, height) / 2,
+
+            color = d3.scale.category10(),
+
+            pie = d3.layout.pie()
+                .value(function (d) {
+                    return d.pct;
+                })
+                .sort(null),
+
+            arc = d3.svg.arc()
+                .innerRadius(radius - 80)
+                .outerRadius(radius - 20),
+
+            svg = d3.select(selector + " .graph").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
+
+            path = svg.datum(dataset).selectAll("path")
+                .data(pie)
+                .enter().append("path")
+                .attr("fill", function (d, i) {
+                    return color(i);
+                })
+                .attr("d", arc)
+                .each(function (d) {
+                    this._selected = d;
+                }),  // store the initial angles
+
+            legend = d3.select(selector).append("svg")
+                .attr("class", "legend")
+                .attr("width", radius * 2)
+                .attr("height", radius * 2)
+                .selectAll("g")
+                .data(color.domain().slice().reverse())
+                .enter().append("g")
+                .attr("transform", function (d, i) {
+                    return "translate(" + (120 + i * 125) + ", 0)";
+                });
+
+        legend.append("rect")
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", color);
+
+        legend.append("text")
+            .attr("x", 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .text(function (d) {
+                return dataset[d].type + ' (' + dataset[d].pct + ')';
+            });
+
+        function change(dataset) {
+            svg.datum(dataset);
+            path = path.data(pie); // compute the new angles
+            path.transition().duration(500).attrTween("d", arcTween); // redraw the arcs
+            legend.select('text').text(function (d) {
+                return dataset[d].type + ' (' + dataset[d].pct + ')';
+            });
+        }
+
+        function arcTween(a) {
+            var i = d3.interpolate(this._selected, a);
+            this._selected = i(0);
+            return function (t) {
+                return arc(i(t));
+            };
+        }
+
+        return {
+            change: change
+        };
+
+    }
+
     // Clean up on tab change
     function cleanup()
     {

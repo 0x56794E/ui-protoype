@@ -84,7 +84,8 @@ var dashboard3 = (function () {
     }
 
 
-    function createMedalBreakdownChart(selector, dataset) {
+    function createMedalBreakdownChart(selector, dataset)
+    {
         var width = 490,
             height = 260,
             radius = Math.min(width, height) / 2,
