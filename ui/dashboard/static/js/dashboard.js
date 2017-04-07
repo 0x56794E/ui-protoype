@@ -43,6 +43,7 @@ var dashboard = (function () {
     	};
     	
     	var options = {
+			"width": 550,
             "axisPaddingLeft": 0,
             "paddingLeft": 30,
             "paddingRight": 0,

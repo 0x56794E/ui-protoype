@@ -86,11 +86,13 @@
     fill: #666;
     font-size: 12px;
     display: table;
-    width: 490px;
+    width: 580px;
     height: 320px;
     float: left;
-    margin: 10px;
+    margin: 10px auto;
+    padding: 10px;
     overflow: hidden;
+    text-align: center;
 }
 
 .chart2 {
