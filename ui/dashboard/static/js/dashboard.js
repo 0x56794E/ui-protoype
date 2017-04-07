@@ -38,6 +38,7 @@ var dashboard = (function () {
     	var data = {
 			'xScale': 'time',
 			'yScale': 'linear',
+			'type': 'line',
 			'main': dataset
     	};
     	
@@ -49,8 +50,9 @@ var dashboard = (function () {
             "axisPaddingTop": 5,
             "yMin": 9,
             "yMax": 40,
-            "interpolation": "linear",
-//            "click": yearSelectionHandler
+            "dataFormatX": function (x) { return d3.time.format('%Y-%m-%d').parse(x); },
+            "tickFormatX": function (x) { return d3.time.format('%A')(x); },
+            
     	};
     	
     	//Legend stuff
@@ -79,7 +81,7 @@ var dashboard = (function () {
     				return dataset[i].asset;
     			});
     	
-        return new xChart('line-dotted', data, selector + " .graph", options);
+        return new xChart('line', data, selector + " .graph", options);
         
     }
     
