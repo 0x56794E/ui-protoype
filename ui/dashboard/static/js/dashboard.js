@@ -37,21 +37,19 @@ var dashboard = (function () {
     {
     	var data = {
 			'xScale': 'time',
-			'yScale': 'linear',
+			'yScale': 'exponential',
 			'type': 'line',
 			'main': dataset
     	};
     	
     	var options = {
             "axisPaddingLeft": 0,
-            "paddingLeft": 20,
+            "paddingLeft": 30,
             "paddingRight": 0,
             "axisPaddingRight": 0,
             "axisPaddingTop": 5,
-            "yMin": 9,
-            "yMax": 40,
             "dataFormatX": function (x) { return d3.time.format('%Y-%m-%d').parse(x); },
-            "tickFormatX": function (x) { return d3.time.format('%A')(x); },
+            "tickFormatX": function (x) { return d3.time.format('%m/%d/%Y')(x); },
             
     	};
     	
