@@ -53,6 +53,7 @@ public class Converter
     //and their corresp column idx
     //Key == array idx; Val == val
     String[] assetNames;
+    boolean header = true;
     
     //Key: asset name; Value: List of pairs <date, price>
     private Map<String, List<Pair<String, String>>> result = new HashMap<>();
@@ -60,37 +61,69 @@ public class Converter
     private void exec (String input, String output)
         throws IOException
     {
-        Stream<String> lines = Files.lines(Paths.get(input));
-        
-        //Read the header
-        Optional<String> headerOpt = lines.findFirst();
-        
-        if (!headerOpt.isPresent())
-            throw new IllegalArgumentException("Invalid file format");
-        
-        String header = headerOpt.get();
-        assetNames = header.split(","); //Use this as look up maps
-        
-        //Init the map
-        for (int i = 1; i < assetNames.length; ++i)
-            result.put(assetNames[i], new ArrayList<Pair<String, String>>());
-        
         //Process the stream skipping the header
-        lines.skip(1).forEach(line -> process(line));
-    }
-
-    private void process(String line)
-    {
-        //Format: <date> <price for stock 0> <prc for stock 1> ... <price for stock n>
-        String toks[] = line.split(",");
-        String date = toks[0];
+         Files.lines(Paths.get(input)).forEach(line -> process(line));
         
-        for (int i = 1; i < toks.length; ++i)
+        //Output to file
+        writeToFile(output);
+    }
+    
+    private void process(String line)
+    {   
+        if (header)
         {
-            result.get(assetNames[i]).add(new Pair<String, String>(date, toks[i]));
+            assetNames = line.split(","); //Use this as look up maps
+        
+            //Init the map
+            for (int i = 1; i < assetNames.length; ++i)
+                result.put(assetNames[i], new ArrayList<Pair<String, String>>());
+            
+            header = false;
+        
+        }
+        else
+        {
+            //Format: <date> <price for stock 0> <prc for stock 1> ... <price for stock n>
+            String toks[] = line.split(",");
+            String date = toks[0];
+
+            for (int i = 1; i < toks.length; ++i)
+            {
+                result.get(assetNames[i]).add(new Pair<String, String>(date, toks[i]));
+            }
+        }
+    }
+    
+    private void writeToFile(String output)
+            throws IOException
+    {
+        List<String> lines = new ArrayList<>();
+        String assetName;
+        
+        lines.add("var asset_price_dataset = [\n");
+        String metaFmt = "{\n"
+                        + "\t\"className\": \".%s\",\n"
+                        + "\t\"asset\": \"%s\",\n"
+                        + "\t\"data\": [\n";
+        
+        String pairFmt = "\t\t{ \"x\": \"%s\", \"y\": %s },\n";
+        
+        //For ea asset
+        for (Map.Entry<String, List<Pair<String, String>>> entry : result.entrySet())
+        {
+            assetName = entry.getKey();
+            lines.add(String.format(metaFmt, assetName, assetName));
+            
+            //For ea price entry:
+            for (Pair<String, String> price : entry.getValue())
+                lines.add(String.format(pairFmt, price.date, price.price));
+            
+            //Closing parens + brackets
+            lines.add("]\n},\n");
         }
         
-        
+        lines.add("];\n");
+        Files.write(Paths.get(output), lines);
     }
 	
 }
