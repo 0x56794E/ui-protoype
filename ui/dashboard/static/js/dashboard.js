@@ -109,6 +109,7 @@ var dashboard = (function () {
         	+ "<div class='title'>Asset Prices</div>"
     		+ "<div class='graph'></div>"
     		+ "</div>";
+        $("#content").append(assetPriceChart);
         
         createAssetPricesChart("#asset-price", asset_price_dataset);
     }
