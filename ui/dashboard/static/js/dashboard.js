@@ -8,8 +8,8 @@ var dashboard = (function () {
     {
 
         chart_widget = new TradingView.widget({
-    		"width" : 580,
-    		"height" : 350,
+    		"width" : 1350,
+    		"height" : 330,
     		"symbol" : "NASDAQ:AAPL",
     		"interval" : "180",
     		"timezone" : "Etc/UTC",
@@ -26,13 +26,6 @@ var dashboard = (function () {
     	
     }
     
-    function loadDataSet()
-    {
-    	//Load CSV file for Asset Prices chart
-    	//Return data in following format in summary.js
-    	
-    }
-    
     function createAssetPricesChart(selector, dataset)
     {
     	var data = {
@@ -43,9 +36,8 @@ var dashboard = (function () {
     	};
     	
     	var options = {
-			"width": 550,
             "axisPaddingLeft": 0,
-            "paddingLeft": 30,
+            "paddingLeft": 10,
             "paddingRight": 0,
             "axisPaddingRight": 0,
             "axisPaddingTop": 5,
@@ -84,33 +76,28 @@ var dashboard = (function () {
         
     }
     
-    
     function getAssetAllocData()
     {
     	return [
-    		{"type": "Stocks        ", "pct": 40},
-    		{"type": "Private Equity", "pct": 30},
-    		{"type": "Other Asset   ", "pct": 30}
+    		{"type": "ABBN.VX", "pct": 1.5},
+    		{"type": "OLV-B.ST", "pct": 1.20},
+    		{"type": "CSCO", "pct": 5.31},
+    		{"type": "AAPL", "pct": 15.22},
+    		{"type": "FB", "pct": 3.8},
+    		{"type": "IAGG", "pct": 25.03},
+    		{"type": "GLD", "pct": 25.03},
+    		{"type": "BAC", "pct": 22.92},
     	];
     }
     
     /* Render the dashboard */
     function render() 
     {	
-    	//Tix Chart
-      	var tixChart = "<div id='price-tix' class='chart'>"
-      		+ "<div class='title'>Current Price</div>"
-    		+ "<div class='graph'></div>"
-    		+ "</div>";
-
-        $("#content").append(tixChart);
-        createTixChart("#price-tix");
-    	
     	//Normalized Returns Chart (from David)
         var normChart = "<div id='norm-returns' class='chart'>"
         	+ "<div class='title'>Normalized Returns</div>"
         	+ "<div class='graph'>"
-        	+ "<iframe width='500' height='350' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
+        	+ "<iframe width='430' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
         	+ "</div>"
         	+ "</div>";
         $("#content").append(normChart);
@@ -121,8 +108,7 @@ var dashboard = (function () {
     		+ "<div class='graph'></div>"
     		+ "</div>";
         $("#content").append(assetPriceChart);
-        
-        createAssetPricesChart("#asset-price", asset_price_dataset);
+        var asset_price=createAssetPricesChart("#asset-price", asset_price_dataset);
         
         //Allocation chart - order book/result from optimizer
         var pieChart = "<div id='asset-alloc' class='chart'>"
@@ -130,37 +116,48 @@ var dashboard = (function () {
         	+ "<div class='graph'></div>"
         	+ "</div>";
         $("#content").append(pieChart);
-        
         createAssetAllocChart('#asset-alloc', getAssetAllocData());
         
+        //Tix Chart
+      	var tixChart = "<div id='price-tix' class='chart'>"
+      		+ "<div class='title'>Current Price</div>"
+    		+ "<div class='graph'></div>"
+    		+ "</div>";
+
+        $("#content").append(tixChart);
+        createTixChart("#price-tix .graph");
         
     }
 
     function createAssetAllocChart(selector, dataset)
     {
-        var width = 490,
-            height = 260,
+        var width = 200,
+            height = 200,
             radius = Math.min(width, height) / 2,
 
             color = d3.scale.category10(),
 
             pie = d3.layout.pie()
-                .value(function (d) {
+                .value(function (d)
+    			{
                     return d.pct;
                 })
-                .sort(null),
+                .sort(null);
+        
 
-            arc = d3.svg.arc()
+       var  arc = d3.svg.arc()
                 .innerRadius(radius - 80)
                 .outerRadius(radius - 20),
 
             svg = d3.select(selector + " .graph").append("svg")
                 .attr("width", width)
                 .attr("height", height)
+                .attr("transform", "translate(10, -100)")
                 .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
+                .attr("transform", "translate(100, 120)")
+                ;
 
-            path = svg.datum(dataset).selectAll("path")
+       var   path = svg.datum(dataset).selectAll("path")
                 .data(pie)
                 .enter().append("path")
                 .attr("fill", function (d, i) {
@@ -169,17 +166,38 @@ var dashboard = (function () {
                 .attr("d", arc)
                 .each(function (d) {
                     this._selected = d;
-                }),  // store the initial angles
+                })
+                .on('click',function(d,i){
+				   d3.select(this)
+				    .transition()
+				    .duration(500)
+				    .attr("transform",function(d){
+				        // this this group expanded out?
+				        if (!d.data._expanded){
+				            d.data._expanded = true;
+				            var a = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
+				            var x = Math.cos(a) * 20;
+				            var y = Math.sin(a) * 20;
+				            // move it away from the circle center
+				            return 'translate(' + x + ',' + y + ')';                
+				        } else {
+				            d.data._expanded = false;
+				            // move it back
+				            return 'translate(0,0)';                
+				        }
+				    }); 
+				});
 
-            legend = d3.select(selector).append("svg")
+       var  legend = d3.select(selector + " .graph").append("svg")
                 .attr("class", "legend")
-                .attr("width", radius * 2)
-                .attr("height", radius * 2)
+                .attr("width", 110)
+                .attr("height", 300)
+                .attr("transform", "translate(0, 10)")
                 .selectAll("g")
                 .data(color.domain().slice().reverse())
                 .enter().append("g")
                 .attr("transform", function (d, i) {
-                    return "translate(" + (120 + i * 125) + ", 0)";
+                    return "translate(0," + (i * 30) + ")";
                 });
 
         legend.append("rect")
