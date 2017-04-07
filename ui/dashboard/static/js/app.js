@@ -24,9 +24,9 @@
 //    routes["#stocks"] = stocks;
     
     // Basic view routing
-    $(window).on('hashchange', function () {
-    	 var hash = window.location.hash;
-         
+//    $(window).on('hashchange', function () {
+//    	 var hash = window.location.hash;
+//         
          //Clean up first
 //         $.each(routes, function (key, val) {
 //         	if (key !== hash)
@@ -35,8 +35,8 @@
 //         
 //         //Render
 //         routes[hash].render();         	
-    	 dashboard.render();
-    });
+//    	 dashboard.render();
+//    });
 
     dashboard.render();
 

@@ -26,13 +26,67 @@ var dashboard = (function () {
     	
     }
     
+    function loadDataSet()
+    {
+    	//Load CSV file for Asset Prices chart
+    	//Return data in following format in summary.js
+    	
+    }
+    
+    function createAssetPricesChart(selector)
+    {
+    	var dataset = loadDataSet();
+    	var data = {
+			'xScale': 'time',
+			'yScale': 'linear',
+			'main': dataset
+    	};
+    	
+    	var options = {
+            "axisPaddingLeft": 0,
+            "paddingLeft": 20,
+            "paddingRight": 0,
+            "axisPaddingRight": 0,
+            "axisPaddingTop": 5,
+            "yMin": 9,
+            "yMax": 40,
+            "interpolation": "linear",
+//            "click": yearSelectionHandler
+    	};
+    	
+    	//Legend stuff
+    	var legend = d3.select(selector).append("svg")
+    					.attr("class", "legend")
+    					.selectAll("g")
+    					.data(dataset)
+    					.enter()
+    					.append("g")
+    					.attr("transform", function (d, i) {
+    	                    return "translate(" + (64 + (i * 84)) + ", 0)";
+    	                });
+    
+    	legend.append("rect")
+    			.attr("width", 18)
+    			.attr("height", 18)
+    			.attr("class", function (d, i) {
+    				return 'color' + i;
+    			});
+    	
+    	legend.append("text")
+    			.attr("x", 24)
+    			.attr("y", 9)
+    			.attr("dy", ".35em")
+    			.text(function (d, i) {
+    				return dataset[i].asset;
+    			});
+    }
     
     /* Render the dashboard */
     function render() 
     {	
     	//Tix Chart
       	var tixChart = "<div id='price-tix' class='chart'>"
-    		+ "<div class='title'>Current Price</div>"
+      		+ "<div class='title'>Current Price</div>"
     		+ "<div class='graph'></div>"
     		+ "</div>";
 
@@ -47,6 +101,14 @@ var dashboard = (function () {
         	+ "</div>"
         	+ "</div>";
         $("#content").append(normChart);
+        
+        //Asset prices (3rd chart)
+        var assetPriceChart = "<div id='asset-price' class='chart'>"
+        	+ "<div class='title'>Asset Prices</div>"
+    		+ "<div class='graph'></div>"
+    		+ "</div>";
+        
+        createAssetPricesChart("asset-price");
     }
     
     // Clean up on tab change
