@@ -4,8 +4,6 @@ Once the server is up and running, you should be able to see this at http://loca
 
 ![alt tag](https://raw.githubusercontent.com/0x56794E/ui-protoype/master/dashboard.png)
 
-=======
-
 ## Env requirements:
 - Python && Django
 - Rer: https://docs.djangoproject.com/en/1.10/intro/tutorial01/
