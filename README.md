@@ -1,6 +1,8 @@
 # ui-protoype
 
-Current working dashboard is at: http://localhost:8000/dashboard
+Once the server is up and running, you should be able to see this at http://localhost:8000/dashboard
+
+![alt tag](https://raw.githubusercontent.com/0x56794E/ui-protoype/master/dashboard.png)
 
 =======
 
