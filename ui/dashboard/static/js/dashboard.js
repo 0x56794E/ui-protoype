@@ -80,13 +80,13 @@ var dashboard = (function () {
     {
     	return [
     		{"type": "ABBN.VX", "pct": 1.5},
-    		{"type": "OLV-B.ST", "pct": 1.20},
-    		{"type": "CSCO", "pct": 5.31},
-    		{"type": "AAPL", "pct": 15.22},
+    		{"type": "OLV-B.ST", "pct": 1.2},
+    		{"type": "CSCO", "pct": 5.3},
+    		{"type": "AAPL", "pct": 15.3},
     		{"type": "FB", "pct": 3.8},
-    		{"type": "IAGG", "pct": 25.03},
-    		{"type": "GLD", "pct": 25.03},
-    		{"type": "BAC", "pct": 22.92},
+    		{"type": "IAGG", "pct": 25.0},
+    		{"type": "GLD", "pct": 25.0},
+    		{"type": "BAC", "pct": 22.9},
     	];
     }
     
@@ -95,7 +95,7 @@ var dashboard = (function () {
     {	
         //Asset prices 
         var assetPriceChart = "<div id='asset-price' class='chart'>"
-        	+ "<div class='title'>Historical Asset Price</div>"
+        	+ "<div class='title'>Historical Asset Prices</div>"
     		+ "<div class='graph'>" 
     		+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/11.embed'></iframe>"
     		+ "</div>"
@@ -104,7 +104,7 @@ var dashboard = (function () {
         
         //Allocation chart - order book/result from optimizer
         var pieChart = "<div id='asset-alloc' class='chart'>"
-        	+ "<div class='title'>Optimal Allocation</div>"
+        	+ "<div class='title'>Optimal Allocations</div>"
         	+ "<div class='graph'></div>"
         	+ "</div>";
         $("#content").append(pieChart);
@@ -112,7 +112,7 @@ var dashboard = (function () {
 
     	//Normalized Returns Chart (from David)
         var normChart = "<div id='norm-returns' class='chart'>"
-        	+ "<div class='title'>Back-tested Return</div>"
+        	+ "<div class='title'>Backtested Returns</div>"
         	+ "<div class='graph'>"
         	+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
         	+ "</div>"
@@ -121,7 +121,7 @@ var dashboard = (function () {
         
         //Tix Chart
       	var tixChart = "<div id='price-tix' class='chart'>"
-      		+ "<div class='title'>Current Price</div>"
+      		+ "<div class='title'>Current Prices</div>"
     		+ "<div class='graph'></div>"
     		+ "</div>";
 
@@ -191,9 +191,9 @@ var dashboard = (function () {
 
        var  legend = d3.select(selector + " .graph").append("svg")
                 .attr("class", "legend")
-                .attr("width", 110)
+                .attr("width", 120)
                 .attr("height", 300)
-                .attr("transform", "translate(0, 10)")
+                .attr("transform", "translate(50, 10)")
                 .selectAll("g")
                 .data(color.domain().slice().reverse())
                 .enter().append("g")
@@ -211,7 +211,7 @@ var dashboard = (function () {
             .attr("y", 9)
             .attr("dy", ".35em")
             .text(function (d) {
-                return dataset[d].type + ' (' + dataset[d].pct + ')';
+                return dataset[d].type + ' (' + dataset[d].pct + '%)';
             });
 
         function change(dataset) {
