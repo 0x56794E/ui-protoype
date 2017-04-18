@@ -76,19 +76,11 @@ var dashboard = (function () {
         
     }
     
-    function getAssetAllocData()
-    {
-    	return [
-    		{"type": "ABBN.VX", "pct": 1.5},
-    		{"type": "OLV-B.ST", "pct": 1.2},
-    		{"type": "CSCO", "pct": 5.3},
-    		{"type": "AAPL", "pct": 15.3},
-    		{"type": "FB", "pct": 3.8},
-    		{"type": "IAGG", "pct": 25.0},
-    		{"type": "GLD", "pct": 25.0},
-    		{"type": "BAC", "pct": 22.9},
-    	];
-    }
+    //For the pie chart
+    var pie_chart_data = [];
+    pie_chart_data["optimalAlloc"] = optimalAlloc;
+    pie_chart_data["usStocks"] = usStocksData;
+    pie_chart_data["euroStocks"] = euroLNDStocksData;
     
     /* Render the dashboard */
     function render() 
@@ -106,10 +98,20 @@ var dashboard = (function () {
         var pieChart = "<div id='asset-alloc' class='chart'>"
         	+ "<div class='title'>Optimal Allocations</div>"
         	+ "<div class='graph'></div>"
+            + "<div><select id='pieChart' class='center'>" 
+                + "<option value='optimalAlloc'>Optimal Allocation</option>"
+                + "<option value='usStocks'>U.S. Stocks</option>"
+                + "<option value='euroStocks'>EUR/LND Stocks</option>"
+                + "</select></div>"
         	+ "</div>";
         $("#content").append(pieChart);
-        createAssetAllocChart('#asset-alloc', getAssetAllocData());
-
+        createAssetAllocChart('#asset-alloc', optimalAlloc); //Default
+        
+        $("#pieChart").change(function () {
+            createAssetAllocChart('#asset-alloc', pie_chart_data[$(this).val()]); 
+        });
+        
+        
     	//Normalized Returns Chart (from David)
         var normChart = "<div id='norm-returns' class='chart'>"
         	+ "<div class='title'>Backtested Returns</div>"
@@ -129,9 +131,12 @@ var dashboard = (function () {
         createTixChart("#price-tix .graph");
         
     }
-
+    
     function createAssetAllocChart(selector, dataset)
     {
+        //Clear content
+        $(selector + " .graph").html("");
+        
         var width = 200,
             height = 200,
             radius = Math.min(width, height) / 2,
@@ -142,8 +147,7 @@ var dashboard = (function () {
                 .value(function (d)
     			{
                     return d.pct;
-                })
-                .sort(null);
+                });
         
 
        var  arc = d3.svg.arc()
@@ -153,7 +157,7 @@ var dashboard = (function () {
             svg = d3.select(selector + " .graph").append("svg")
                 .attr("width", width)
                 .attr("height", height)
-                .attr("transform", "translate(10, -100)")
+                .attr("transform", "translate(10, -20)")
                 .append("g")
                 .attr("transform", "translate(100, 120)")
                 ;
@@ -191,9 +195,9 @@ var dashboard = (function () {
 
        var  legend = d3.select(selector + " .graph").append("svg")
                 .attr("class", "legend")
-                .attr("width", 120)
-                .attr("height", 300)
-                .attr("transform", "translate(50, 10)")
+                .attr("width", 180)
+                .attr("height", 220)
+                .attr("transform", "translate(20, 10)")
                 .selectAll("g")
                 .data(color.domain().slice().reverse())
                 .enter().append("g")

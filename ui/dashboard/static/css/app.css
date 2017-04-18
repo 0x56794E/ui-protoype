@@ -85,7 +85,7 @@
     font-family: Helvetica, Arial, Verdana, sans-serif;
     fill: #666;
     font-size: 12px;
-    width: 470px;
+    width: 450px;
     height: 320px;
     float: left;
     margin: 10px auto;
@@ -94,9 +94,6 @@
     text-align: center;
 }
 
-.chart2 {
-    height: 650px;
-}
 
 .chart>.title {
     display: table-cell;
@@ -128,12 +125,6 @@
     width: 200px;
 }
 
-.chart2 {
-    width: 460px;
-    height: 680px;
-    float: left;
-    padding: 10px;
-}
 
 .color0 {
     fill: #3880aa;
@@ -168,6 +159,11 @@
 }
 
 /* CUSTOM */
+.center
+{
+    margin: 0 auto;
+}
+
 .inline
 {
 	display: inline-block;
