@@ -206,6 +206,6 @@
 #subPieBg
 {
     z-index: 500;
-    background-color: darkgray;
-    opacity: 0.6;
+    background-color: #4a4945;
+    opacity: 0.8;
 }
