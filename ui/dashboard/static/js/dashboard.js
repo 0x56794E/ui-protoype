@@ -81,7 +81,12 @@ var dashboard = (function () {
     {	
         //Asset prices 
         var assetPriceChart = "<div id='asset-price' class='chart'>"
-        	+ "<div class='title'>Historical Asset Prices</div>"
+        	+ "<div class='title'><div>Historical Asset Prices"
+            + "<select id='histCharts'>"
+                + "<option value='GOOGL'>GOOGL</option>"
+                + "<option value='DG'>DG</option>"
+                + "<option value='EXC'>EXC</option>"
+            + "</select></div>"
     		+ "<div class='graph'>" 
     		+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/49.embed'></iframe>"
     		+ "</div>"
@@ -94,29 +99,28 @@ var dashboard = (function () {
         	+ "<div class='graph'></div>"
             + "<div id='subPie' class='chart'><div class='graph'></div></div>"
             + "<div id='subPieBg' class='hide'></div>"
-//            + "<div><select id='pieChart' class='center'>" 
-//                + "<option value='optimalAlloc'>Optimal Allocation</option>"
-//                + "<option value='usStocks'>U.S. Stocks</option>"
-//                + "<option value='euroStocks'>EUR/LND Stocks</option>"
-//                + "</select></div>"
         	+ "</div>";
         $("#content").append(pieChart);
         createAssetAllocChart('#asset-alloc', '.graph', optimalAlloc, true); //Default
         
-//        $("#pieChart").change(function () {
-//            createAssetAllocChart('#asset-alloc', pie_chart_data[$(this).val()]); 
-//        });
-        
         
     	//Backtested Returns Chart (from David)
-        var normChart = "<div id='norm-returns' class='chart'>"
-        	+ "<div class='title'>Backtested Returns <select><option>GOOGL</option></select></div>"
+        var returnsChart = "<div id='norm-returns' class='chart'>"
+        	+ "<div class='title'><div>Backtested Returns</div>"
+            + "<select id='returnsCharts'>"
+                + "<option value='PORT'>Our Portfolio</option>"
+                + "<option value='GOOGL'>GOOGL</option>"
+                + "<option value='DG'>DG</option>"
+                + "<option value='EXC'>EXC</option>"
+            + "</select></div>"
         	+ "<div class='graph'>"
-        	+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/23.embed'></iframe>"
-            //+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
+        	   + "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
         	+ "</div>"
         	+ "</div>";
-        $("#content").append(normChart);
+        $("#content").append(returnsChart);
+        $("#returnsCharts").change(function () {
+            $("#norm-returns .graph").html(returnsCharts[$(this).val()]);
+        });
         
         //Tix Chart
       	var tixChart = "<div id='price-tix' class='chart'>"

@@ -87,7 +87,7 @@
     fill: white;
     font-size: 12px;
     width: 450px;
-    height: 320px;
+    height: 360px;
     float: left;
     margin: 10px auto;
     padding: 15px;
@@ -208,4 +208,9 @@
     z-index: 500;
     background-color: #4a4945;
     opacity: 0.8;
+}
+
+.chart .title select
+{
+    margin: 10px auto 0;
 }
