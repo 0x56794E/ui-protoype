@@ -13,10 +13,10 @@ var dashboard = (function () {
     		"symbol" : "NASDAQ:AAPL",
     		"interval" : "180",
     		"timezone" : "Etc/UTC",
-    		"theme" : "White",
-    		"style" : "1",
+    		"theme" : "Black",
+    		"style" : "3", //3 is good
     		"locale" : "en",
-    		"toolbar_bg" : "#f1f3f6",
+    		"toolbar_bg" : "#0f0f0e",
     		"enable_publishing" : false,
     		"allow_symbol_change" : true,
     		"hideideas" : true
@@ -76,12 +76,6 @@ var dashboard = (function () {
         
     }
     
-    //For the pie chart
-    var pie_chart_data = [];
-    pie_chart_data["optimalAlloc"] = optimalAlloc;
-    pie_chart_data["usStocks"] = usStocksData;
-    pie_chart_data["euroStocks"] = euroLNDStocksData;
-    
     /* Render the dashboard */
     function render() 
     {	
@@ -89,7 +83,7 @@ var dashboard = (function () {
         var assetPriceChart = "<div id='asset-price' class='chart'>"
         	+ "<div class='title'>Historical Asset Prices</div>"
     		+ "<div class='graph'>" 
-    		+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/11.embed'></iframe>"
+    		+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/49.embed'></iframe>"
     		+ "</div>"
     		+ "</div>";
         $("#content").append(assetPriceChart);
@@ -98,25 +92,28 @@ var dashboard = (function () {
         var pieChart = "<div id='asset-alloc' class='chart'>"
         	+ "<div class='title'>Optimal Allocations</div>"
         	+ "<div class='graph'></div>"
-            + "<div><select id='pieChart' class='center'>" 
-                + "<option value='optimalAlloc'>Optimal Allocation</option>"
-                + "<option value='usStocks'>U.S. Stocks</option>"
-                + "<option value='euroStocks'>EUR/LND Stocks</option>"
-                + "</select></div>"
+            + "<div id='subPie' class='chart'><div class='graph'></div></div>"
+            + "<div id='subPieBg' class='hide'></div>"
+//            + "<div><select id='pieChart' class='center'>" 
+//                + "<option value='optimalAlloc'>Optimal Allocation</option>"
+//                + "<option value='usStocks'>U.S. Stocks</option>"
+//                + "<option value='euroStocks'>EUR/LND Stocks</option>"
+//                + "</select></div>"
         	+ "</div>";
         $("#content").append(pieChart);
-        createAssetAllocChart('#asset-alloc', optimalAlloc); //Default
+        createAssetAllocChart('#asset-alloc', '.graph', optimalAlloc, true); //Default
         
-        $("#pieChart").change(function () {
-            createAssetAllocChart('#asset-alloc', pie_chart_data[$(this).val()]); 
-        });
+//        $("#pieChart").change(function () {
+//            createAssetAllocChart('#asset-alloc', pie_chart_data[$(this).val()]); 
+//        });
         
         
-    	//Normalized Returns Chart (from David)
+    	//Backtested Returns Chart (from David)
         var normChart = "<div id='norm-returns' class='chart'>"
-        	+ "<div class='title'>Backtested Returns</div>"
+        	+ "<div class='title'>Backtested Returns <select><option>GOOGL</option></select></div>"
         	+ "<div class='graph'>"
-        	+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
+        	+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/23.embed'></iframe>"
+            //+ "<iframe width='450' height='320' frameborder='0' scrolling='no' src='//plot.ly/~DavidFB/7.embed'></iframe>"
         	+ "</div>"
         	+ "</div>";
         $("#content").append(normChart);
@@ -132,13 +129,13 @@ var dashboard = (function () {
         
     }
     
-    function createAssetAllocChart(selector, dataset)
+    function createAssetAllocChart(selector, grapharea, dataset, showTooltip)
     {
         //Clear content
-        $(selector + " .graph").html("");
+        $(selector + " " + grapharea).html("");
         
         var width = 200,
-            height = 200,
+            height = 250,
             radius = Math.min(width, height) / 2,
 
             color = d3.scale.category10(),
@@ -147,20 +144,20 @@ var dashboard = (function () {
                 .value(function (d)
     			{
                     return d.pct;
-                });
+                })
+                .sort(null);
         
 
        var  arc = d3.svg.arc()
                 .innerRadius(radius - 80)
-                .outerRadius(radius - 20),
-
-            svg = d3.select(selector + " .graph").append("svg")
+                .outerRadius(radius - 20);
+        
+       var  svg = d3.select(selector + " " + grapharea).append("svg")
                 .attr("width", width)
                 .attr("height", height)
-                .attr("transform", "translate(10, -20)")
+                .attr("transform", "translate(10, -10)")
                 .append("g")
-                .attr("transform", "translate(100, 120)")
-                ;
+                .attr("transform", "translate(100, 120)");
 
        var   path = svg.datum(dataset).selectAll("path")
                 .data(pie)
@@ -172,25 +169,40 @@ var dashboard = (function () {
                 .each(function (d) {
                     this._selected = d;
                 })
-                .on('click',function(d,i){
-				   d3.select(this)
-				    .transition()
-				    .duration(500)
-				    .attr("transform",function(d){
-				        // this this group expanded out?
-				        if (!d.data._expanded){
-				            d.data._expanded = true;
-				            var a = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
-				            var x = Math.cos(a) * 20;
-				            var y = Math.sin(a) * 20;
-				            // move it away from the circle center
-				            return 'translate(' + x + ',' + y + ')';                
-				        } else {
-				            d.data._expanded = false;
-				            // move it back
-				            return 'translate(0,0)';                
-				        }
-				    }); 
+                .on("mouseover", function (d, i) {
+                    //Show tooltip
+                    if (showTooltip)
+                    {
+                        createAssetAllocChart("#subPie", ".graph", d.data.detail);
+                        
+                        $("#subPieBg").removeClass("hide");
+                    }
+                })
+                .on("mouseout", function() {
+                    $("#subPie .graph").html("");
+                    $("#subPieBg").addClass("hide");
+                })
+                .on('click', function(d, i){
+                    // Pull out the clicked part
+                   d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .attr("transform",function(d){
+                        // this this group expanded out?
+                        if (!d.data._expanded){
+                            d.data._expanded = true;
+                            var a = d.startAngle + (d.endAngle - d.startAngle)/2 - Math.PI/2;
+                            var x = Math.cos(a) * 20;
+                            var y = Math.sin(a) * 20;
+                            // move it away from the circle center
+                            return 'translate(' + x + ',' + y + ')';                
+                        } else {
+                            d.data._expanded = false;
+                            // move it back
+                            return 'translate(0,0)'; 
+                        }
+                    }); 
+
 				});
 
        var  legend = d3.select(selector + " .graph").append("svg")

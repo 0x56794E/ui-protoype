@@ -78,12 +78,13 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    background: #ffffff;
+    background: #1c1b19;
+    color: #fff;
 }
 
 .chart {
     font-family: Helvetica, Arial, Verdana, sans-serif;
-    fill: #666;
+    fill: white;
     font-size: 12px;
     width: 450px;
     height: 320px;
@@ -177,5 +178,34 @@
 
 #asset-alloc
 {
-	padding-left: 50px;
+	padding-left: 10px;
+}
+
+#subPie,
+#subPieBg
+{
+    position: absolute;
+    float: left;
+    top: 180px;
+    left: 100px;
+    width: 420px;
+    height: 280px;
+
+}
+
+#subPie
+{
+    z-index: 1000;
+}
+
+.hide
+{
+    display: none;
+}
+
+#subPieBg
+{
+    z-index: 500;
+    background-color: darkgray;
+    opacity: 0.6;
 }
